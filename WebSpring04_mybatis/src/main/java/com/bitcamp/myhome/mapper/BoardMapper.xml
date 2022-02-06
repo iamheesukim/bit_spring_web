@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.myhome.board.BoardDAOImp">
+	<!-- 추상클래스 이름 담아줄형태(?) -->
+	<select id="boardAllSelect"
+		resultType="com.bitcamp.myhome.board.BoardVO">
+		select no,userid,subject,hit,to_char(writedate,'MM-DD
+		HH:MI') writedate
+		from board order by no desc
+	</select>
+
+	<select id="boardView" parameterType="int"
+		resultType="com.bitcamp.myhome.board.BoardVO">
+		select no,userid,subject,hit,writedate,content from board
+		where
+		no=#{param1}
+		<!-- boardView 메소드에서 받는 매개변수가 하나이므로 param1 만약, 매개변수가 2개였다면 param1 param2로 
+			각각을 의미함 근데 #{} 이런 형태로 담나봄 -->
+	</select>
+
+	<!-- 뭔가 return 이 null값이라고 하면 여기가 문제 -->
+	<insert id="boardWriteOk"
+		parameterType="com.bitcamp.myhome.board.BoardVO">
+		insert into board(no,userid,subject,content,ip)
+		values(boardsq.nextval, #{userid}, #{subject}, #{content}, #{ip})
+	</insert>
+
+	<update id="boardEditOk"
+		parameterType="com.bitcamp.myhome.board.BoardVO">
+		update board set subject=#{subject}, content=#{content}
+		where no=#{no} and userid=#{userid}
+	</update>
+
+
+	<delete id="boardDelete">
+		delete from board where no=#{param1} and userid=#{param2}
+	</delete>
+</mapper>
