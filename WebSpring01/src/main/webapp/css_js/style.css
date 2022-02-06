@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+ul,li {margin:0; padding:0; list-style-type:none;}
+body{border:1px solid gray;}
+p{background-color:pink;}
+
+#menu{overflow:auto;background-color:#ddd;}
+#menu>li{float:left; width:120px; height:40px; line-height:40px; 
+		background-color:#ddd; text-align:center;}
+
+#bottom{height:40px; background-color:lightblue;}
+		

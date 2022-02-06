@@ -1,0 +1,146 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SEOUL</title>
+<script src="resources/api/jquery-3.4.1.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="resources/api/jquery.bxslider.css"
+	type="text/css" />
+<script src="resources/api/jquery.bxslider.js"></script>
+<link rel="stylesheet" href="resources/api/bootstrap.min.css"
+	type="text/css" />
+<script src="resources/api/bootstrap.min.js"></script>
+
+
+<style>
+body {
+	margin: 0 auto;
+	width: 800px;
+}
+
+#loginTop, #loginMode {
+	margin-bottom:10px;
+	height: 24px;
+	width: 800px;
+	text-align:right;
+}
+
+#loginTop a{
+	color:gray;
+}
+
+form {
+	float: right;
+}
+
+#logo {
+	line-height:100px;
+	text-align: center;
+	height: 100px;
+	width: 800px;
+}
+
+#menu, #menu ul, #menu li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#menu a:link, #menu a:visited, #menu a:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+#menu>li a:hover {
+	color: #f00;
+}
+
+#menu {
+	margin-bottom:50px;
+}
+
+/*메인메뉴*/
+#menu>li {
+	height: 50px;
+	float: left;
+	background-color: #456;
+	border-bottom: 1px solid white;
+	line-height: 50px;
+	width: 20%;
+	text-align: center;
+	z-index: 100;
+}
+
+/*서브메뉴*/
+#menu>li>ul {
+	position: relative;
+	z-index: 100;
+	background-color: #456;
+	display: none;
+}
+</style>
+<script>
+	$(()=>{
+		$("#menu>li").on({mouseenter:function(){
+			$(this).children('ul').css('display','block');
+		},mouseleave:function() {
+			$(this).children('ul').css('display','none');
+		}});
+	});
+</script>
+</head>
+<body>
+	<!-- 로그인 -->
+	<div id="loginTop">
+		<c:if test="${logStatus!='Y'}">
+			<form method="post" action="/seoul/loginOk" id="logFrm">
+				<input type="text" id="userid" name="userid" placeholder="아이디" required/>
+				<input type="password" id="userpwd" name="userpwd" placeholder="비밀번호" required/>
+				<input type="submit" value="로그인" />
+				<a href="#">회원가입</a> <a href="#">고객센터</a>
+			</form>
+		</c:if>
+		
+		<c:if test="${logStatus=='Y'}">
+			<div id="loginMode">
+				${logname }님 <a href="/seoul/logout">로그아웃</a>
+				<a href="#">회원정보수정</a>
+			</div>
+   		</c:if>
+	</div>
+
+	<!-- 서울시 로고 -->
+	<div id="logo">
+		<a href="https://www.seoul.go.kr/main/index.jsp">
+		<img src="resources/img/seoul.png" /></a>
+	</div>
+
+	<!-- 메뉴 -->
+	<ul id="menu">
+		<li><a href="#">나의서울</a></li>
+		<li><a href="#">전자우편</a></li>
+		<li><a href="#">서울소개</a>
+			<ul>
+				<li><a href="#">시청안내</a></li>
+				<li><a href="#">서울의상징</a></li>
+				<li><a href="#">서울의역사</a></li>
+				<li><a href="#">서울정보</a></li>
+			</ul></li>
+		<li><a href="#">시민참여</a>
+			<ul>
+				<li><a href="#">서울시민과의대화</a></li>
+				<li><a href="#">시민의건</a></li>
+				<li><a href="#">공모전</a></li>
+			</ul></li>
+		<li><a href="#">청사안내</a>
+			<ul>
+				<li><a href="#">조직도</a></li>
+				<li><a href="#">시의회</a></li>
+				<li><a href="#">자치구</a></li>
+			</ul></li>
+	</ul>
+	
